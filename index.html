@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Copy Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #cf5809;
+        }
+        .code-container {
+            margin-bottom: 20px;
+            background-color: #000000;
+            color: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+            position: relative;
+        }
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 10px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>HARSHA</h1>
+
+<!-- Code 1 -->
+<div class="code-container">
+    <pre id="code1">def linear_search(arr, x):
+    return arr.index(x) if x in arr else -1
+
+def binary_search(arr, x):
+    arr.sort()
+    low, high = 0, len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == x: return mid
+        elif arr[mid] < x: low = mid + 1
+        else: high = mid - 1
+    return -1
+
+arr = list(map(int, input("Enter list: ").split()))
+x = int(input("Search: "))
+choice = input("Linear or Binary? ").lower()
+print("Found at:", linear_search(arr, x) if choice == "linear" else binary_search(arr, x))
+</pre>
+    <button class="copy-btn" onclick="copyCode('code1')">Copy</button>
+</div>
+
+<!-- Code 2 -->
+<div class="code-container">
+    <pre id="code2">def insertion(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i-1
+        while j >= 0 and key < arr[j]:
+            arr[j+1] = arr[j]
+            j -= 1
+        arr[j+1] = key
+
+def bubble(arr):
+    for i in range(len(arr)):
+        for j in range(0, len(arr)-i-1):
+            if arr[j] > arr[j+1]: arr[j], arr[j+1] = arr[j+1], arr[j]
+
+def selection(arr):
+    for i in range(len(arr)):
+        min_i = i
+        for j in range(i+1, len(arr)):
+            if arr[j] < arr[min_i]: min_i = j
+        arr[i], arr[min_i] = arr[min_i], arr[i]
+
+arr = list(map(int, input("Enter list: ").split()))
+choice = input("Sort using? (insertion/bubble/selection): ").lower()
+eval(choice)(arr)
+print("Sorted:", arr)
+</pre>
+    <button class="copy-btn" onclick="copyCode('code2')">Copy</button>
+</div>
+
+<!-- Code 3 to 16 (empty for you to fill) -->
+<!-- You can paste your code inside each <pre> tag -->
+
+<!-- Code 3 -->
+<div class="code-container">
+    <pre id="code3">class Node:
+    def __init__(self, data): self.data, self.next = data, None
+
+class LinkedList:
+    def __init__(self): self.head = None
+
+    def insert(self, data):
+        new = Node(data)
+        new.next = self.head
+        self.head = new
+
+    def delete(self, key):
+        temp = self.head
+        if temp and temp.data == key: self.head = temp.next; return
+        while temp and temp.next and temp.next.data != key: temp = temp.next
+        if temp and temp.next: temp.next = temp.next.next
+
+    def search(self, key):
+        temp = self.head
+        while temp:
+            if temp.data == key: return True
+            temp = temp.next
+        return False
+
+    def reverse(self):
+        prev, curr = None, self.head
+        while curr: curr.next, prev, curr = prev, curr, curr.next
+        self.head = prev
+
+    def concat(self, other):
+        if not self.head: self.head = other.head; return
+        temp = self.head
+        while temp.next: temp = temp.next
+        temp.next = other.head
+
+    def display(self):
+        temp = self.head
+        while temp: print(temp.data, end=" "); temp = temp.next
+        print()
+
+# Example use:
+l1, l2 = LinkedList(), LinkedList()
+for i in [1,2,3]: l1.insert(i)
+for i in [4,5]: l2.insert(i)
+l1.concat(l2); l1.reverse(); l1.display()
+</pre>
+    <button class="copy-btn" onclick="copyCode('code3')">Copy</button>
+</div>
+
+<!-- Code 4 -->
+<div class="code-container">
+    <pre id="code4">class DNode:
+    def __init__(self, data): self.data, self.prev, self.next = data, None, None
+
+class DLinkedList:
+    def __init__(self): self.head = None
+
+    def insert(self, data):
+        new = DNode(data)
+        new.next = self.head
+        if self.head: self.head.prev = new
+        self.head = new
+
+    def delete(self, key):
+        temp = self.head
+        while temp and temp.data != key: temp = temp.next
+        if not temp: return
+        if temp.prev: temp.prev.next = temp.next
+        if temp.next: temp.next.prev = temp.prev
+        if temp == self.head: self.head = temp.next
+
+    def search(self, key):
+        temp = self.head
+        while temp:
+            if temp.data == key: return True
+            temp = temp.next
+        return False
+
+    def reverse(self):
+        temp, prev = self.head, None
+        while temp:
+            prev = temp.prev
+            temp.prev, temp.next = temp.next, temp.prev
+            prev = temp
+            temp = temp.prev
+        if prev: self.head = prev
+</pre>
+    <button class="copy-btn" onclick="copyCode('code4')">Copy</button>
+</div>
+
+<!-- Code 5 -->
+<div class="code-container">
+    <pre id="code5">class CNode:
+    def __init__(self, data): self.data, self.next = data, None
+
+class CircularLinkedList:
+    def __init__(self): self.head = None
+
+    def insert(self, data):
+        new = CNode(data)
+        if not self.head:
+            self.head = new
+            new.next = self.head
+        else:
+            temp = self.head
+            while temp.next != self.head: temp = temp.next
+            temp.next = new
+            new.next = self.head
+
+    def delete(self, key):
+        temp, prev = self.head, None
+        if not self.head: return
+        while True:
+            if temp.data == key:
+                if prev: prev.next = temp.next
+                elif temp.next == self.head: self.head = None
+                else:
+                    last = self.head
+                    while last.next != self.head: last = last.next
+                    self.head = temp.next
+                    last.next = self.head
+                return
+            prev, temp = temp, temp.next
+            if temp == self.head: break
+
+    def search(self, key):
+        temp = self.head
+        if not temp: return False
+        while True:
+            if temp.data == key: return True
+            temp = temp.next
+            if temp == self.head: break
+        return False
+
+    def reverse(self):
+        prev, curr = None, self.head
+        first = self.head
+        if not curr: return
+        while True:
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+            if curr == self.head: break
+        first.next = prev
+        self.head = prev
+</pre>
+    <button class="copy-btn" onclick="copyCode('code5')">Copy</button>
+</div>
+
+<!-- Code 6 -->
+<div class="code-container">
+    <pre id="code6">class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Stack:
+    def __init__(self):
+        self.top = None
+
+    def push(self, value):
+        new_node = Node(value)
+        new_node.next = self.top
+        self.top = new_node
+        print(f"{value} pushed to stack.")
+
+    def pop(self):
+        if self.top is None:
+            print("Stack Underflow")
+            return
+        popped = self.top.data
+        self.top = self.top.next
+        print(f"{popped} popped from stack.")
+
+    def display(self):
+        if self.top is None:
+            print("Stack is empty.")
+            return
+        temp = self.top
+        print("Stack elements:", end=" ")
+        while temp:
+            print(temp.data, end=" ")
+            temp = temp.next
+        print()
+
+# Example usage
+stack = Stack()
+stack.push(10)
+stack.push(20)
+stack.push(30)
+stack.display()
+
+stack.pop()
+stack.display()
+</pre>
+    <button class="copy-btn" onclick="copyCode('code6')">Copy</button>
+</div>
+
+<!-- Code 7 -->
+<div class="code-container">
+    <pre id="code7">class Stack:
+    def __init__(self, max_size=100):
+        self.stack = []
+        self.max_size = max_size
+
+    def push(self, value):
+        if len(self.stack) >= self.max_size:
+            print("Stack Overflow")
+            return
+        self.stack.append(value)
+        print(f"{value} pushed to stack.")
+
+    def pop(self):
+        if not self.stack:
+            print("Stack Underflow")
+            return
+        print(f"{self.stack.pop()} popped from stack.")
+
+    def display(self):
+        if not self.stack:
+            print("Stack is empty.")
+            return
+        print("Stack elements:", *reversed(self.stack))
+
+# Example usage
+s = Stack()
+s.push(10)
+s.push(20)
+s.push(30)
+s.display()
+
+s.pop()
+s.display()
+</pre>
+    <button class="copy-btn" onclick="copyCode('code7')">Copy</button>
+</div>
+
+<!-- Code 8 -->
+<div class="code-container">
+    <pre id="code8">class CircularQueue:
+    def __init__(self, size):
+        self.size = size
+        self.queue = [None] * size
+        self.front = self.rear = -1
+
+    def enqueue(self, value):
+        # Check if queue is full
+        if (self.rear + 1) % self.size == self.front:
+            print("Queue is full!")
+            return
+        # First element
+        if self.front == -1:
+            self.front = self.rear = 0
+        else:
+            self.rear = (self.rear + 1) % self.size
+        self.queue[self.rear] = value
+        print(f"{value} inserted.")
+
+    def dequeue(self):
+        if self.front == -1:
+            print("Queue is empty!")
+            return
+        removed = self.queue[self.front]
+        # Only one element
+        if self.front == self.rear:
+            self.front = self.rear = -1
+        else:
+            self.front = (self.front + 1) % self.size
+        print(f"{removed} removed.")
+
+    def display(self):
+        if self.front == -1:
+            print("Queue is empty!")
+            return
+        print("Queue contents:", end=" ")
+        i = self.front
+        while True:
+            print(self.queue[i], end=" ")
+            if i == self.rear:
+                break
+            i = (i + 1) % self.size
+        print()
+
+# Example
+q = CircularQueue(5)
+q.enqueue(10)
+q.enqueue(20)
+q.enqueue(30)
+q.display()
+
+q.dequeue()
+q.display()
+
+q.enqueue(40)
+q.enqueue(50)
+q.enqueue(60)  # fills the queue
+q.display()
+
+q.enqueue(70)  # should say queue is full
+</pre>
+    <button class="copy-btn" onclick="copyCode('code8')">Copy</button>
+</div>
+
+<!-- Code 9 -->
+<div class="code-container">
+    <pre id="code9">class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None
+
+class Deque:
+    def __init__(self):
+        self.front = None
+        self.rear = None
+
+    def insert_front(self, value):
+        new_node = Node(value)
+        if self.front is None:
+            self.front = self.rear = new_node
+        else:
+            new_node.next = self.front
+            self.front.prev = new_node
+            self.front = new_node
+        print(f"{value} inserted at front.")
+
+    def insert_rear(self, value):
+        new_node = Node(value)
+        if self.rear is None:
+            self.front = self.rear = new_node
+        else:
+            new_node.prev = self.rear
+            self.rear.next = new_node
+            self.rear = new_node
+        print(f"{value} inserted at rear.")
+
+    def delete_front(self):
+        if self.front is None:
+            print("Deque is empty!")
+            return
+        print(f"{self.front.data} deleted from front.")
+        self.front = self.front.next
+        if self.front is None:
+            self.rear = None
+        else:
+            self.front.prev = None
+
+    def delete_rear(self):
+        if self.rear is None:
+            print("Deque is empty!")
+            return
+        print(f"{self.rear.data} deleted from rear.")
+        self.rear = self.rear.prev
+        if self.rear is None:
+            self.front = None
+        else:
+            self.rear.next = None
+
+    def display(self):
+        if self.front is None:
+            print("Deque is empty!")
+            return
+        temp = self.front
+        print("Deque contents:", end=" ")
+        while temp:
+            print(temp.data, end=" ")
+            temp = temp.next
+        print()
+
+# Example
+dq = Deque()
+dq.insert_rear(10)
+dq.insert_front(20)
+dq.insert_rear(30)
+dq.display()
+
+dq.delete_front()
+dq.delete_rear()
+dq.display()
+</pre>
+    <button class="copy-btn" onclick="copyCode('code9')">Copy</button>
+</div>
+
+<!-- Code 10 -->
+<div class="code-container">
+    <pre id="code10">def factorial_rec(n): return 1 if n==0 else n * factorial_rec(n-1)
+def factorial_iter(n): r = 1; [r := r*i for i in range(1,n+1)]; return r
+def factors(n): return [i for i in range(1, n+1) if n % i == 0]
+print(factorial_rec(7))  
+print(factorial_iter(8))     
+print(factors(5))            </pre>
+    <button class="copy-btn" onclick="copyCode('code10')">Copy</button>
+</div>
+
+<!-- Code 11 -->
+<div class="code-container">
+    <pre id="code11">def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        print(a, end=" ")
+        a, b = b, a + b
+n = 10  
+fibonacci(n)
+</pre>
+    <button class="copy-btn" onclick="copyCode('code11')">Copy</button>
+</div>
+
+<!-- Code 12 -->
+<div class="code-container">
+    <pre id="code12">def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+# Example usage
+num1 = 56
+num2 = 98
+print(f"GCD of {num1} and {num2} is: {gcd(num1, num2)}")
+</pre>
+    <button class="copy-btn" onclick="copyCode('code12')">Copy</button>
+</div>
+
+<!-- Code 13 -->
+<div class="code-container">
+    <pre id="code13">class Node:
+    def __init__(self, data): self.data, self.left, self.right = data, None, None
+
+class BST:
+    def __init__(self): self.root = None
+
+    def insert_rec(self, root, key):
+        if not root: return Node(key)
+        if key < root.data: root.left = self.insert_rec(root.left, key)
+        else: root.right = self.insert_rec(root.right, key)
+        return root
+
+    def insert_iter(self, key):
+        node = Node(key)
+        if not self.root: self.root = node; return
+        curr = self.root
+        while True:
+            if key < curr.data:
+                if curr.left: curr = curr.left
+                else: curr.left = node; break
+            else:
+                if curr.right: curr = curr.right
+                else: curr.right = node; break
+
+    def search(self, root, key):
+        if not root or root.data == key: return root
+        return self.search(root.left, key) if key < root.data else self.search(root.right, key)
+
+    def preorder(self, root): 
+        if root: print(root.data, end=' '); self.preorder(root.left); self.preorder(root.right)
+
+    def inorder(self, root): 
+        if root: self.inorder(root.left); print(root.data, end=' '); self.inorder(root.right)
+
+    def postorder(self, root): 
+        if root: self.postorder(root.left); self.postorder(root.right); print(root.data, end=' ')
+
+    def preorder_iter(self):
+        stack, curr = [self.root], []
+        while stack:
+            node = stack.pop()
+            curr.append(node.data)
+            if node.right: stack.append(node.right)
+            if node.left: stack.append(node.left)
+        print(*curr)
+
+    def inorder_iter(self):
+        stack, curr, node = [], [], self.root
+        while True:
+            while node: stack.append(node); node = node.left
+            if not stack: break
+            node = stack.pop()
+            curr.append(node.data)
+            node = node.right
+        print(*curr)
+
+    def postorder_iter(self):
+        stack, curr = [self.root], []
+        while stack:
+            node = stack.pop()
+            curr.append(node.data)
+            if node.left: stack.append(node.left)
+            if node.right: stack.append(node.right)
+        print(*curr[::-1])
+
+    def level_order(self):
+        from collections import deque
+        q = deque([self.root])
+        while q:
+            node = q.popleft()
+            print(node.data, end=' ')
+            if node.left: q.append(node.left)
+            if node.right: q.append(node.right)
+
+    def count_nodes(self, root):
+        if not root: return (0, 0)
+        if not root.left and not root.right: return (1, 0)
+        l_leaf, l_non = self.count_nodes(root.left)
+        r_leaf, r_non = self.count_nodes(root.right)
+        return (l_leaf + r_leaf, l_non + r_non + 1)
+
+    def height(self, root):
+        if not root: return -1
+        return 1 + max(self.height(root.left), self.height(root.right))
+
+    def mirror(self, root):
+        if root:
+            root.left, root.right = self.mirror(root.right), self.mirror(root.left)
+        return root
+
+    def are_equal(self, r1, r2):
+        if not r1 and not r2: return True
+        if r1 and r2 and r1.data == r2.data:
+            return self.are_equal(r1.left, r2.left) and self.are_equal(r1.right, r2.right)
+        return False
+
+    def delete_copying(self, root, key):
+        if not root: return root
+        if key < root.data: root.left = self.delete_copying(root.left, key)
+        elif key > root.data: root.right = self.delete_copying(root.right, key)
+        else:
+            if not root.left: return root.right
+            if not root.right: return root.left
+            maxL = root.left
+            while maxL.right: maxL = maxL.right
+            root.data = maxL.data
+            root.left = self.delete_copying(root.left, maxL.data)
+        return root
+
+    def delete_merging(self, root, key):
+        if not root: return None
+        if key < root.data: root.left = self.delete_merging(root.left, key)
+        elif key > root.data: root.right = self.delete_merging(root.right, key)
+        else:
+            if not root.left: return root.right
+            if not root.right: return root.left
+            m = root.left
+            while m.right: m = m.right
+            m.right = root.right
+            return root.left
+        return root
+
+# Example:
+bst = BST()
+for i in [40, 20, 60, 10, 30, 50, 70]:
+    bst.root = bst.insert_rec(bst.root, i)
+
+print("Inorder Recursive:", end=' '); bst.inorder(bst.root); print()
+print("Preorder Iterative:", end=' '); bst.preorder_iter()
+print("Level Order:", end=' '); bst.level_order(); print()
+leaf, nonleaf = bst.count_nodes(bst.root)
+print("Leaf:", leaf, "Non-leaf:", nonleaf)
+print("Height:", bst.height(bst.root))
+</pre>
+    <button class="copy-btn" onclick="copyCode('code13')">Copy</button>
+</div>
+
+<!-- Code 14 -->
+<div class="code-container">
+    <pre id="code14">def to_sparse(mat):
+    sparse = []
+    for i in range(len(mat)):
+        for j in range(len(mat[0])):
+            if mat[i][j] != 0:
+                sparse.append([i, j, mat[i][j]])
+    return sparse
+
+def to_matrix(sparse, rows, cols):
+    mat = [[0]*cols for _ in range(rows)]
+    for r in sparse:
+        mat[r[0]][r[1]] = r[2]
+    return mat
+
+mat = [[0, 0, 3], [0, 0, 0], [5, 0, 0]]
+sp = to_sparse(mat)
+print("Sparse Form:", sp)
+mat2 = to_matrix(sp, 3, 3)
+print("Normal Form:", mat2)
+</pre>
+    <button class="copy-btn" onclick="copyCode('code14')">Copy</button>
+</div>
+
+<!-- Code 15 -->
+<div class="code-container">
+    <pre id="code15">def reverse_stack(stack):
+    temp = []
+    while stack: temp.append(stack.pop())
+    return temp
+
+stk = [1,2,3,4]
+print("Reversed:", reverse_stack(stk))
+</pre>
+    <button class="copy-btn" onclick="copyCode('code15')">Copy</button>
+</div>
+
+<!-- Code 16 -->
+<div class="code-container">
+    <pre id="code16">from collections import deque
+
+def reverse_stack_with_queue(stack):
+    q = deque()
+    while stack: q.append(stack.pop())
+    while q: stack.append(q.popleft())
+    return stack
+
+stk = [1,2,3,4]
+print("Reversed:", reverse_stack_with_queue(stk))
+</pre>
+    <button class="copy-btn" onclick="copyCode('code16')">Copy</button>
+</div>
+
+<!-- Message area -->
+<p id="copy-message" class="message"></p>
+
+<script>
+    function copyCode(codeId) {
+        var codeText = document.getElementById(codeId).textContent;
+        var textArea = document.createElement('textarea');
+        textArea.value = codeText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        document.getElementById('copy-message').innerText = 'Code copied to clipboard!';
+        setTimeout(function () {
+                    document.getElementById('copy-message').innerText = '';
+                }, 2000);
+            }
+        </script>
